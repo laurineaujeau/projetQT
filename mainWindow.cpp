@@ -18,6 +18,7 @@ mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)
     //avatarView->scale(0.5, 0.5);
     avatarView->resize(300, 300);
     avatarView->setWindowTitle(item->getDescription());
+    avatarView->centerOn(item);
     avatarView->show();
 
 

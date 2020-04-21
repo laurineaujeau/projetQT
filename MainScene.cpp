@@ -42,13 +42,12 @@ void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
 void MainScene::update() {
 
     // view update
-    QGraphicsView * view ;
+    view = new QGraphicsView();
     view->centerOn(this->item);
 }
 
 
 void MainScene::keyPressEvent(QKeyEvent * event){
-    //update();
 
     //Déplacement  vers la gauche
     if(event->key() == Qt::Key_A) { // 75=gauche
@@ -65,44 +64,10 @@ void MainScene::keyPressEvent(QKeyEvent * event){
         cout<< "haut"<< endl;
         this->item->move("haut");
         this->item->move("bas");
-      /*  QTime  time = QTime::currentTime();
-        QTime  tFinal = time.addMSecs(700);
-        while (QTime::currentTime()<tFinal){
-            this->item->move("haut");
-            cout<< "boucle1"<< endl;
-           // update();
-           //QTimer::stop(100);
-            cout<< "bouclebis"<< endl;
-        }
-        time = QTime::currentTime();
-        tFinal = time.addMSecs(700);
-        while (QTime::currentTime()<tFinal){
-            this->item->move("bas");
-            cout<< "boucle2"<< endl;
-           // update();
-        }*/
-
-       /*this->timer = new QTimer(this);
-       for( int t=0; t<3 ; t++){
-            this->timer->start(30);
-            connect(timer, SIGNAL(timeout()), this, SLOT(this->item->move("haut")));
-        }
-        for( int t=0; t<3 ; t++){
-            this->timer->start(100);
-            connect(timer, SIGNAL(timeout()), this, SLOT(aaaathis->item->move("bas")));
-        }*/
-       /* this->timer = new QTimer(this);
-        this->timer->start(100);
-        connect(timer, SIGNAL(timeout()), this, SLOT(this->item->move("haut")));
-        this->timer->start(100);
-        connect(timer, SIGNAL(timeout()), this, SLOT(this->item->move("bas")));*/
     }
     //sauter
     if(event->key() == Qt::Key_R) { //=sauter
         cout<< "sauter"<< endl;
 
-       /* this->timer = new QTimer(this);
-        this->timer->start(100);
-        connect(timer, SIGNAL(timeout()), this, SLOT(this->item->move("sauter")));*/
     }
 }

@@ -21,11 +21,13 @@ private :
     QPixmap background ;
     AvatarItem* item;
     QTimer * timer;
-
+    QGraphicsView * view;
 public:
     MainScene();
 
     void drawBackground(QPainter *painter, const QRectF &rect);
+
+    void keyPressEvent(QKeyEvent * event);
 
     AvatarItem* getItem(){
         return item;
@@ -36,7 +38,7 @@ public:
     //virtual ~MainScene();
 public slots :
     void update();
-    void keyPressEvent(QKeyEvent * event);
+
 };
 
 

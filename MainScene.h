@@ -44,7 +44,7 @@ public:
     void setEtatAvatar(int etatAvatar){
         this->etatAvatar=etatAvatar;
     }
-    //void keyReleaseEvent(QKeyEvent * event);
+    void keyReleaseEvent(QKeyEvent * event);
 
     //virtual ~MainScene();
 public slots :

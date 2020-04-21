@@ -8,6 +8,7 @@
 #include <QGraphicsPixmapItem>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <iostream>
 #include <QTimer>
 #include <string>
 using namespace std;
@@ -23,7 +24,7 @@ private :
 public:
 
     AvatarItem(QString description, QString imageFileName) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description) {
-        this->speed = 20;
+        this->speed = 10;
     }
 
     void move(string direction);

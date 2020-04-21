@@ -13,7 +13,7 @@ void AvatarItem::move(string direction) {
         this->setPos(newX, pos.y());
     }
     //Déplacement vers la droite
-    if(direction=="droite") { // 77=droite
+    if(direction=="droite") { // 77=droitea
         int newX = pos.x() - speed;
         this->setPos(newX, pos.y());
     }
@@ -22,31 +22,20 @@ void AvatarItem::move(string direction) {
 
        int Y = pos.y();
       // int X = pos.x();
-      int hauteur = Y+80;
-       //int largeur = X+40;
-      // QTimer timer;
-     //  QTimer tFinal;
-       //tFinal = constantTime(1000);
-      // timer.start(1000);
-       // QTimer :: singleShot ( 1000 ,this , SLOT ( quit()));
-       //while (timer.isActive()){
-      // while (timer.setInterval(1000)){
-      while(pos.y()<hauteur){
-          int newY = pos.y() - 15;
+      int hauteur = Y-80;
+        cout<< "hello"<< endl;
+        cout<< pos.y()<< endl;
+      while(int(pos.y())>hauteur){
+          cout<< "coucou"<< endl;
+          int newY = int(pos.y()) - speed;
+          cout<< pos.y()<< endl;
           this->setPos(pos.x(), newY);
       }
 
-      //     }
-      // }
-
-
     }
-    /*if(direction=="bas") {
-        for(int t=0; t<100; t++) {
-            int newY = pos.y() + 60;
-            this->setPos(pos.x(), newY);
-        }
-    }*/
+    if(direction=="stop") {
+            this->setPos(pos.x(), pos.y());
+    }
 
 }
 void AvatarItem::updateD(int X,int Y,int hauteur,int largeur){

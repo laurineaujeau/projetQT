@@ -33,4 +33,5 @@ mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)
 
     QKeyEvent * event;
     mainScene->keyPressEvent(event);
+    mainScene->keyReleaseEvent(event);
 }

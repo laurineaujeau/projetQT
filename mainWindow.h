@@ -6,6 +6,7 @@
 #include <QMainWindow>
 #include <QGraphicsView>
 #include <QVector>
+#include <QRect>
 #include <QKeyEvent>
 #ifndef PROJETQT_MAINWINDOW_H
 #define PROJETQT_MAINWINDOW_H

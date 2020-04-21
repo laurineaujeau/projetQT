@@ -6,6 +6,7 @@
 #include <QPainter>
 #include <QGraphicsPixmapItem>
 #include <QTimer>
+#include <QRectF>
 #include <QVector>
 #include "mainWindow.h"
 mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)

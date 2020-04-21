@@ -23,7 +23,7 @@ private :
 public:
 
     AvatarItem(QString description, QString imageFileName) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description) {
-        this->speed = 10;
+        this->speed = 20;
     }
 
     void move(string direction);

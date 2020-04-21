@@ -6,11 +6,13 @@
 #include <QTimer>
 #include <QTime>
 #include <QPainter>
-#include <QRectF>
+#include <QRect>
 #include <QLabel>
+
 #ifndef PROJETQT_WINDOW_H
 #define PROJETQT_WINDOW_H
 #include "AvatarItem.h"
+#include "RectItem.h"
 
 using namespace std;
 class MainScene: public QGraphicsScene{
@@ -22,6 +24,7 @@ private :
     AvatarItem* item;
     QTimer * timer;
     QGraphicsView * view;
+    QList<RectItem*> rectangles;
 public:
     MainScene();
 

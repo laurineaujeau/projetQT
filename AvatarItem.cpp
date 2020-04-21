@@ -24,10 +24,19 @@ void AvatarItem::move(string direction) {
       // int X = pos.x();
        //int hauteur = Y+40;
        //int largeur = X+40;
-       for(int t=0; t<100; t++){
-           int newY = pos.y() - 60;
-           this->setPos(pos.x(), newY);
-       }
+      // QTimer timer;
+     //  QTimer tFinal;
+       //tFinal = constantTime(1000);
+      // timer.start(1000);
+       // QTimer :: singleShot ( 1000 ,this , SLOT ( quit()));
+       //while (timer.isActive()){
+      // while (timer.setInterval(1000)){
+               int newY = pos.y() - 15;
+               this->setPos(pos.x(), newY);
+      //     }
+      // }
+
+
     }
     /*if(direction=="bas") {
         for(int t=0; t<100; t++) {

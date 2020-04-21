@@ -2,13 +2,6 @@
 // Created by lauri on 17/04/2020.
 //
 
-//#include <QGraphicsScene>
-//#include <QGraphicsView>
-//#include <QPainter>
-//#include <QGraphicsPixmapItem>
-//#include <QTimer>
-//#include <QVector>
-//#include <QPointF>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QPainter>
@@ -17,6 +10,7 @@
 #include <QTimer>
 #include <QVector>
 #include <QLabel>
+#include <QRect>
 #include <iostream>
 #include <QKeyEvent>
 #include "MainScene.h"
@@ -34,6 +28,13 @@ MainScene::MainScene(){
     this->item->setPos(this->width()-810, this->height()/2.1 );
     this->addItem(item);
 
+
+    this->rectangles.push_back(new RectItem(0,424,233,82));
+    this->rectangles.push_back(new RectItem(345,424,463,82));
+    this->rectangles.push_back(new RectItem(515,345,112,74));
+    for(RectItem* rectangle : rectangles){
+        this->addItem(rectangle);
+    }
 }
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);
@@ -42,7 +43,7 @@ void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
 void MainScene::update() {
 
     // view update
-    view = new QGraphicsView();
+    QGraphicsView * view = new QGraphicsView();
     view->centerOn(this->item);
 }
 

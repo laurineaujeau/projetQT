@@ -20,31 +20,14 @@ void AvatarItem::move(string direction) {
     //Déplacement vers le haut
     if(direction=="haut") { //72=haut
 
-      /* int Y = pos.y();
+       int Y = pos.y();
       // int X = pos.x();
        //int hauteur = Y+40;
        //int largeur = X+40;
        for(int t=0; t<100; t++){
            int newY = pos.y() - 60;
            this->setPos(pos.x(), newY);
-       }*/
-      /*  float x = 0;
-        float y = 0;
-
-        float vy = 0;
-
-        while(0) {
-            if(objet_en_lair)
-                vy += 0.4;
-
-            else
-                vy = 0;
-
-            y += vy;
-
-            drawImage(x, y);
-        }*/
-
+       }
     }
     /*if(direction=="bas") {
         for(int t=0; t<100; t++) {

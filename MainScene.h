@@ -25,6 +25,8 @@ private :
     QTimer * timer;
     QGraphicsView * view;
     QList<RectItem*> rectangles;
+    int etatAvatar;
+
 public:
     MainScene();
 
@@ -36,6 +38,12 @@ public:
         return item;
     }
 
+    int getEtatAvatar(){
+        return etatAvatar;
+    }
+    void setEtatAvatar(int etatAvatar){
+        this->etatAvatar=etatAvatar;
+    }
     //void keyReleaseEvent(QKeyEvent * event);
 
     //virtual ~MainScene();

@@ -45,30 +45,46 @@ void MainScene::update() {
     // view update
     QGraphicsView * view = new QGraphicsView();
     view->centerOn(this->item);
+    if (getEtatAvatar()==1){
+        this->item->move("gauche");
+    }
+    else if (getEtatAvatar()==2){
+        this->item->move("droite");
+    }
+    else if (getEtatAvatar()==3){
+        this->item->move("haut");
+    }
+    else if (getEtatAvatar()==4){
+        this->item->move("sauter");
+    }
 }
 
 
 void MainScene::keyPressEvent(QKeyEvent * event){
 
     //Déplacement  vers la gauche
-    if(event->key() == Qt::Key_A) { // 75=gauche
+    if(event->key() == Qt::Key_Left) { // 75=gauche
         cout<< "gauche"<< endl;
-        this->item->move("gauche");
+        setEtatAvatar(1);
+
     }
     //Déplacement vers la droite
-    if(event->key() == Qt::Key_Z) { // 77=droite
+    if(event->key() == Qt::Key_Right) { // 77=droite
         cout << "droite" << endl;
-        this->item->move("droite");
+        setEtatAvatar(2);
+
     }
     //Déplacement vers le haut
-    if(event->key() == Qt::Key_E) { //72=haut
+    if(event->key() == Qt::Key_Up) { //72=haut
         cout<< "haut"<< endl;
-        this->item->move("haut");
-        this->item->move("bas");
+        setEtatAvatar(3);
+
     }
     //sauter
-    if(event->key() == Qt::Key_R) { //=sauter
+    if(event->key() == Qt::Key_Space) { //=sauter
+        setEtatAvatar(4);
         cout<< "sauter"<< endl;
 
     }
 }
+

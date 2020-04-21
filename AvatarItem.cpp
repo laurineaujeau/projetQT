@@ -22,7 +22,7 @@ void AvatarItem::move(string direction) {
 
        int Y = pos.y();
       // int X = pos.x();
-       //int hauteur = Y+40;
+      int hauteur = Y+80;
        //int largeur = X+40;
       // QTimer timer;
      //  QTimer tFinal;
@@ -31,8 +31,11 @@ void AvatarItem::move(string direction) {
        // QTimer :: singleShot ( 1000 ,this , SLOT ( quit()));
        //while (timer.isActive()){
       // while (timer.setInterval(1000)){
-               int newY = pos.y() - 15;
-               this->setPos(pos.x(), newY);
+      while(pos.y()<hauteur){
+          int newY = pos.y() - 15;
+          this->setPos(pos.x(), newY);
+      }
+
       //     }
       // }
 

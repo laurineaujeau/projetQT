@@ -115,8 +115,20 @@ void MainScene::update() {
         if (this->item->collidesWithItem(rectangle)){
             isSaut=false;
         }*/
-        if(this->item->pos().x()>=0 && this->item->pos().x()<=355) {
-
+        if(this->item->pos().x()>=0 && this->item->pos().x()<=515) {
+            if(this->item->pos().y()<=235){
+                this->item->move("bas");
+            }
+        }
+        if(this->item->pos().x()>=630 && this->item->pos().x()<=813) {
+            if(this->item->pos().y()<=235){
+                this->item->move("bas");
+            }
+        }
+        if(this->item->pos().x()>515 && this->item->pos().x()<630) {
+            if(this->item->pos().y()<=165){
+                this->item->move("bas");
+            }
         }
         //}
         //}

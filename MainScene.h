@@ -25,7 +25,13 @@ private :
     QTimer * timer;
     QGraphicsView * view;
     QList<RectItem*> rectangles;
+    RectItem* trou;
+    RectItem* arrivee;
+    RectItem* finTrou;
+    RectItem* hauteurMax;
     int etatAvatar;
+    int etatPrecedent;
+    bool isSaut;
 
 public:
     MainScene();
@@ -44,7 +50,15 @@ public:
     void setEtatAvatar(int etatAvatar){
         this->etatAvatar=etatAvatar;
     }
+    int getEtatPrecedent(){
+        return etatPrecedent;
+    }
+    void setEtatPrecedent(int etatPrecedent){
+        this->etatPrecedent=etatPrecedent;
+    }
     void keyReleaseEvent(QKeyEvent * event);
+
+    void gravity();
 
     //virtual ~MainScene();
 public slots :

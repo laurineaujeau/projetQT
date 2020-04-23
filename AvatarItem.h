@@ -10,6 +10,7 @@
 #include <QKeyEvent>
 #include <iostream>
 #include <QTimer>
+#include <QVector>
 #include <string>
 using namespace std;
 class AvatarItem : public QGraphicsPixmapItem  {
@@ -19,6 +20,9 @@ private :
     int speed;
     QKeyEvent * event;
     QTimer * timer;
+    //QVector gravity;
+   // QVector velocity;
+   // QPoint position;
 
 
 public:
@@ -46,8 +50,7 @@ public:
     void setSpeed(int speed) {
         this->speed = speed;
     }
-public slots :
-    void updateD(int X,int Y,int hauteur,int largeur);
+   // void updateDt(float dt);
 
 };
 

@@ -29,12 +29,27 @@ MainScene::MainScene(){
     this->addItem(item);
 
 
-    this->rectangles.push_back(new RectItem(0,424,233,82));
-    this->rectangles.push_back(new RectItem(345,424,463,82));
-    this->rectangles.push_back(new RectItem(515,345,112,74));
+    this->rectangles.push_back(new RectItem(0,434,233,74)); // premier sol
+    this->rectangles.push_back(new RectItem(347,434,467,74));// deuxieme sol
+    this->rectangles.push_back(new RectItem(515,355,112,78));//buisson
+    this->rectangles.push_back(new RectItem(0,0,1,506)); //cadre gauche
+    //this->rectangles.push_back(new RectItem(813,0,1,506));
     for(RectItem* rectangle : rectangles){
         this->addItem(rectangle);
+        rectangle->setOpacity(1);
     }
+    trou = new RectItem(270,417,50,89);
+    this->addItem(trou);
+    trou->setOpacity(1);
+    arrivee = new RectItem(800,261,13,149);
+    this->addItem(arrivee);
+    arrivee->setOpacity(1);
+    finTrou = new RectItem(234,506,111,1);
+    this->addItem(finTrou);
+    finTrou->setOpacity(1);
+    hauteurMax = new RectItem(0,93,813,1);
+    this->addItem(hauteurMax);
+    hauteurMax->setOpacity(1);
 }
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);
@@ -45,22 +60,111 @@ void MainScene::update() {
     // view update
     QGraphicsView * view = new QGraphicsView();
     view->centerOn(this->item);
+    //gravity();
+   // this->item->move("bas");
+    //this->position = this->position + this->gravity*dt;
+   // this->velocity = this->velocity + this->gravity*dt;
+    for(RectItem* rectangle : rectangles){
+        if (this->item->collidesWithItem(rectangle)){
+            //setEtatAvatar(0);
+            if (getEtatPrecedent()==1){
+                this->item->move("droite");
+            }
+            else if (getEtatPrecedent()==2){
+                this->item->move("gauche");
+            }
+            /*else if (getEtatPrecedent()==3){
+                this->item->move("tomber");
+            }
+            else if (getEtatPrecedent()==4){
+                this->item->move("bas");
 
+            }*/
+            /*else if (getEtatPrecedent()==0){
+                this->item->move("stop");
+            }*/
+        }
+        //else {
+      //      this->item->move("tomber");   traverse le sol
+      //  }
+    }
+
+
+    if (this->item->collidesWithItem(trou)){
+        this->item->move("tomber");
+    }
+    if (this->item->collidesWithItem(finTrou)){
+       // setEtatPrecedent(0);
+        cout<< "perdu"<< endl;
+    }
+    if (this->item->collidesWithItem(arrivee)){
+        //setEtatPrecedent(0);
+        cout<< "gagné"<< endl;
+    }
+    //if (this->item->collidesWithItem(hauteurMax) || this->item->pos().y()<=240){
+    if (isSaut){
+        //setEtatPrecedent(0);
+        //if(this->item->pos().y()<=415){
+        //for(int t=0; t<20; t++){
+        /*for(RectItem* rectangle : rectangles){
+
+        if (this->item->collidesWithItem(rectangle)){
+            isSaut=false;
+        }
+        this->item->move("bas");
+        if (this->item->collidesWithItem(rectangle)){
+            isSaut=false;
+        }*/
+        if(this->item->pos().x()>=0 && this->item->pos().x()<=355) {
+
+        }
+        //}
+        //}
+    cout<<this->item->pos().y()<<endl;
+
+    }
     //etat update
     if (getEtatAvatar()==1){
         this->item->move("gauche");
+        setEtatPrecedent(1);
     }
     else if (getEtatAvatar()==2){
+
         this->item->move("droite");
+        setEtatPrecedent(2);
     }
     else if (getEtatAvatar()==3){
-        this->item->move("haut");
+        isSaut=true;
+        for(int t=0; t<20; t++){
+            this->item->move("haut");
+        }
+        setEtatPrecedent(3);
     }
     else if (getEtatAvatar()==4){
+       // for(int t=0; t<20; t++) {
+        isSaut=true;
         this->item->move("sauter");
+        //}
+        setEtatPrecedent(4);
+
+        /*this->position = Point(0,0);
+        this->velocity = Vector(2,2);
+        this->gravity = Vector(0,-2);
+        float previousTime = 0;
+        float currentTime = GetCurrentTime();
+        while(true){
+            previousTime=currentTime;
+            currentTime=GetCurrentTime();
+            float dt = currentTime-previousTime;
+            if(dt>0,15*f){
+                dt = 0,15*f;
+            }
+            update();
+        }*/
     }
     else if (getEtatAvatar()==0){
         this->item->move("stop");
+        setEtatPrecedent(0);
     }
 }
 
@@ -111,4 +215,11 @@ void MainScene::keyReleaseEvent(QKeyEvent * event){
 
     }
 }
+void MainScene::gravity(){
 
+    if (getEtatAvatar()==4){
+        this->item->move("bas+");
+    }else{
+        this->item->move("bas");
+    }
+}

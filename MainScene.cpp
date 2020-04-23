@@ -33,7 +33,7 @@ MainScene::MainScene(){
     this->rectangles.push_back(new RectItem(347,434,467,74));// deuxieme sol
     this->rectangles.push_back(new RectItem(515,355,112,78));//buisson
     this->rectangles.push_back(new RectItem(0,0,1,506)); //cadre gauche
-    //this->rectangles.push_back(new RectItem(813,0,1,506));
+    this->rectangles.push_back(new RectItem(813,0,1,506)); //cadre droite
     for(RectItem* rectangle : rectangles){
         this->addItem(rectangle);
         rectangle->setOpacity(1);
@@ -102,6 +102,13 @@ void MainScene::update() {
         cout<< "gagné"<< endl;
     }
     //if (this->item->collidesWithItem(hauteurMax) || this->item->pos().y()<=240){
+    if (getEtatAvatar()==3){
+        setEtatPrecedent(3);
+    }
+    else if (getEtatAvatar()==4){
+        setEtatPrecedent(4);
+
+    }
     if (isSaut){
         //setEtatPrecedent(0);
         //if(this->item->pos().y()<=415){
@@ -115,25 +122,50 @@ void MainScene::update() {
         if (this->item->collidesWithItem(rectangle)){
             isSaut=false;
         }*/
-        if(this->item->pos().x()>=0 && this->item->pos().x()<=515) {
-            if(this->item->pos().y()<=235){
-                this->item->move("bas");
-            }
+        if (getEtatAvatar()==3){
+            isSaut=true;
+            //for(int t=0; t<20; t++){
+            this->item->move("haut");
+            //}
+            setEtatPrecedent(3);
         }
-        if(this->item->pos().x()>=630 && this->item->pos().x()<=813) {
-            if(this->item->pos().y()<=235){
-                this->item->move("bas");
-            }
+        else if (getEtatAvatar()==4){
+            // for(int t=0; t<20; t++) {
+            isSaut=true;
+            this->item->move("sauter");
+            //}
+            setEtatPrecedent(4);
+
         }
-        if(this->item->pos().x()>515 && this->item->pos().x()<630) {
-            if(this->item->pos().y()<=165){
-                this->item->move("bas");
-            }
-        }
+
         //}
         //}
     cout<<this->item->pos().y()<<endl;
 
+    }
+    else{
+        if(this->item->pos().x()>=0 && this->item->pos().x()<=515) {
+            cout<<getEtatPrecedent()<<endl;
+            if(this->item->pos().y()<=235){
+                if (getEtatPrecedent()==3){
+                    this->item->move("tomber");
+                }
+                if (getEtatPrecedent()==4){
+                    this->item->move("bas");
+                }
+
+            }
+        }
+        if(this->item->pos().x()>=600 && this->item->pos().x()<=813) {
+            if(this->item->pos().y()<=235){
+                this->item->move("bas");
+            }
+        }
+        if(this->item->pos().x()>515 && this->item->pos().x()<600) {
+            if(this->item->pos().y()<=165){
+                this->item->move("bas");
+            }
+        }
     }
     //etat update
     if (getEtatAvatar()==1){
@@ -141,39 +173,10 @@ void MainScene::update() {
         setEtatPrecedent(1);
     }
     else if (getEtatAvatar()==2){
-
         this->item->move("droite");
         setEtatPrecedent(2);
     }
-    else if (getEtatAvatar()==3){
-        isSaut=true;
-        for(int t=0; t<20; t++){
-            this->item->move("haut");
-        }
-        setEtatPrecedent(3);
-    }
-    else if (getEtatAvatar()==4){
-       // for(int t=0; t<20; t++) {
-        isSaut=true;
-        this->item->move("sauter");
-        //}
-        setEtatPrecedent(4);
 
-        /*this->position = Point(0,0);
-        this->velocity = Vector(2,2);
-        this->gravity = Vector(0,-2);
-        float previousTime = 0;
-        float currentTime = GetCurrentTime();
-        while(true){
-            previousTime=currentTime;
-            currentTime=GetCurrentTime();
-            float dt = currentTime-previousTime;
-            if(dt>0,15*f){
-                dt = 0,15*f;
-            }
-            update();
-        }*/
-    }
     else if (getEtatAvatar()==0){
         this->item->move("stop");
         setEtatPrecedent(0);
@@ -199,11 +202,12 @@ void MainScene::keyPressEvent(QKeyEvent * event){
     if(event->key() == Qt::Key_Up) { //72=haut
         cout<< "haut"<< endl;
         setEtatAvatar(3);
-
+        isSaut=true;
     }
     //sauter
     if(event->key() == Qt::Key_Space) { //=sauter
         setEtatAvatar(4);
+        isSaut=true;
         cout<< "sauter"<< endl;
 
     }
@@ -219,11 +223,12 @@ void MainScene::keyReleaseEvent(QKeyEvent * event){
 
     }
     if(event->key() == Qt::Key_Up) {
-        setEtatAvatar(0);
-
+        //setEtatAvatar(0);
+        isSaut =false;
     }
     if(event->key() == Qt::Key_Space) {
-        setEtatAvatar(0);
+       // setEtatAvatar(0);
+        isSaut =false;
 
     }
 }

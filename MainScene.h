@@ -29,6 +29,7 @@ private :
     RectItem* arrivee;
     RectItem* finTrou;
     RectItem* hauteurMax;
+    RectItem* LimiteMax;
     int etatAvatar;
     int etatPrecedent;
     bool isSaut;

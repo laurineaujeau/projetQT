@@ -33,7 +33,7 @@ MainScene::MainScene(){
     this->rectangles.push_back(new RectItem(347,434,467,74));// deuxieme sol
     this->rectangles.push_back(new RectItem(515,355,112,78));//buisson
     this->rectangles.push_back(new RectItem(0,0,1,506)); //cadre gauche
-    this->rectangles.push_back(new RectItem(813,0,1,506)); //cadre droite
+    //this->rectangles.push_back(new RectItem(813,0,1,506)); //cadre droite
     for(RectItem* rectangle : rectangles){
         this->addItem(rectangle);
         rectangle->setOpacity(1);
@@ -50,6 +50,9 @@ MainScene::MainScene(){
     hauteurMax = new RectItem(0,93,813,1);
     this->addItem(hauteurMax);
     hauteurMax->setOpacity(1);
+    LimiteMax = new RectItem(813,0,1,506);
+    this->addItem(LimiteMax);
+    LimiteMax->setOpacity(1);
 }
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);
@@ -66,20 +69,21 @@ void MainScene::update() {
    // this->velocity = this->velocity + this->gravity*dt;
     for(RectItem* rectangle : rectangles){
         if (this->item->collidesWithItem(rectangle)){
-            //setEtatAvatar(0);
+
             if (getEtatPrecedent()==1){
                 this->item->move("droite");
             }
             else if (getEtatPrecedent()==2){
                 this->item->move("gauche");
             }
-            /*else if (getEtatPrecedent()==3){
-                this->item->move("tomber");
+            else if (getEtatPrecedent()==3){
+                this->item->move("haut+");
             }
             else if (getEtatPrecedent()==4){
-                this->item->move("bas");
+                this->item->move("gauche");
 
-            }*/
+            }
+            //setEtatAvatar(0);
             /*else if (getEtatPrecedent()==0){
                 this->item->move("stop");
             }*/
@@ -94,12 +98,16 @@ void MainScene::update() {
         this->item->move("tomber");
     }
     if (this->item->collidesWithItem(finTrou)){
-       // setEtatPrecedent(0);
+        setEtatAvatar(0);
         cout<< "perdu"<< endl;
     }
     if (this->item->collidesWithItem(arrivee)){
-        //setEtatPrecedent(0);
+        setEtatAvatar(0);
         cout<< "gagné"<< endl;
+    }
+    if (this->item->collidesWithItem(LimiteMax)){
+        setEtatAvatar(0);
+        //cout<< "gagné"<< endl;
     }
     //if (this->item->collidesWithItem(hauteurMax) || this->item->pos().y()<=240){
     if (getEtatAvatar()==3){
@@ -123,7 +131,7 @@ void MainScene::update() {
             isSaut=false;
         }*/
         if (getEtatAvatar()==3){
-            isSaut=true;
+            //isSaut=true;
             //for(int t=0; t<20; t++){
             this->item->move("haut");
             //}
@@ -131,7 +139,7 @@ void MainScene::update() {
         }
         else if (getEtatAvatar()==4){
             // for(int t=0; t<20; t++) {
-            isSaut=true;
+            //isSaut=true;
             this->item->move("sauter");
             //}
             setEtatPrecedent(4);

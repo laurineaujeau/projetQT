@@ -22,6 +22,10 @@ void AvatarItem::move(string direction) {
         int newY = int(pos.y()) - 31*2;
         this->setPos(pos.x(), newY);
     }
+    if(direction=="haut+") {
+        int newY = int(pos.y()) - speed;
+        this->setPos(pos.x(), newY);
+    }
     if(direction=="stop") {
             this->setPos(pos.x(), pos.y());
     }

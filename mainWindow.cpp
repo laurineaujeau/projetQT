@@ -9,14 +9,24 @@
 #include <QRectF>
 #include <QVector>
 #include "mainWindow.h"
+#include "Menu.h"
 mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)
 {
+    /*this->menu = new Menu();
+
+    menuView = new QGraphicsView();
+    menuView ->setScene(menu);
+    menuView ->scale(1, 1);
+
+    this->setCentralWidget(menuView);
+    this->setWindowTitle("Menu");
+    this->resize(1100, 700);*/
+
     this->mainScene = new MainScene();
     AvatarItem* item = this->mainScene->getItem();
 
     QGraphicsView* avatarView = new QGraphicsView();
     avatarView->setScene(mainScene);
-    //avatarView->scale(0.5, 0.5);
     avatarView->resize(300, 300);
     avatarView->setWindowTitle(item->getDescription());
     avatarView->centerOn(item);

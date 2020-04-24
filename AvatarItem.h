@@ -19,10 +19,6 @@ private :
     QString description;
     int speed;
     QKeyEvent * event;
-    QTimer * timer;
-    //QVector gravity;
-   // QVector velocity;
-   // QPoint position;
 
 
 public:
@@ -32,7 +28,6 @@ public:
     }
 
     void move(string direction);
-
 
 
     //GETTERS
@@ -50,7 +45,6 @@ public:
     void setSpeed(int speed) {
         this->speed = speed;
     }
-   // void updateDt(float dt);
 
 };
 

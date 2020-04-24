@@ -32,7 +32,9 @@ private :
     RectItem* LimiteMax;
     int etatAvatar;
     int etatPrecedent;
+    int etatPrecedent2;
     bool isSaut;
+    int itemID;
 
 public:
     MainScene();
@@ -41,25 +43,35 @@ public:
 
     void keyPressEvent(QKeyEvent * event);
 
+    void keyReleaseEvent(QKeyEvent * event);
+
+    //GETTERS
     AvatarItem* getItem(){
         return item;
     }
-
     int getEtatAvatar(){
         return etatAvatar;
-    }
-    void setEtatAvatar(int etatAvatar){
-        this->etatAvatar=etatAvatar;
     }
     int getEtatPrecedent(){
         return etatPrecedent;
     }
+    int getEtatPrecedent2(){
+        return etatPrecedent2;
+    }
+    int getItemID(){
+        return itemID;
+    }
+    //SETTERS
+
+    void setEtatAvatar(int etatAvatar){
+        this->etatAvatar=etatAvatar;
+    }
     void setEtatPrecedent(int etatPrecedent){
         this->etatPrecedent=etatPrecedent;
     }
-    void keyReleaseEvent(QKeyEvent * event);
-
-    void gravity();
+    void setEtatPrecedent2(int etatPrecedent2){
+        this->etatPrecedent2=etatPrecedent2;
+    }
 
     //virtual ~MainScene();
 public slots :

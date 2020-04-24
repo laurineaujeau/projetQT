@@ -10,7 +10,6 @@
 #include <QPen>
 
 class RectItem : public QGraphicsRectItem {
-    //O_OBJECT;
 public:
     RectItem(int x, int y, int width, int height);
 };

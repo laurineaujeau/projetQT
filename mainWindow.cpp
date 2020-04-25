@@ -9,21 +9,22 @@
 #include <QRectF>
 #include <QVector>
 #include "mainWindow.h"
-#include "Menu.h"
+//#include "Menu.h"
 mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)
 {
-    /*this->menu = new Menu();
+  /*  this->menu = new Menu();
 
-    menuView = new QGraphicsView();
-    menuView ->setScene(menu);
-    menuView ->scale(1, 1);
+    QGraphicsView* menuView = new QGraphicsView();
+    menuView->setScene(menu);
+    menuView->resize(1100, 700);
+    menuView->scale(1, 1);
+    menuView->setWindowTitle("Menu");
+    menuView->show();*/
 
-    this->setCentralWidget(menuView);
-    this->setWindowTitle("Menu");
-    this->resize(1100, 700);*/
 
     this->mainScene = new MainScene();
     AvatarItem* item = this->mainScene->getItem();
+
 
     QGraphicsView* avatarView = new QGraphicsView();
     avatarView->setScene(mainScene);
@@ -41,7 +42,9 @@ mainWindow::mainWindow(QWidget *parent): QMainWindow(parent)
     this->setWindowTitle("Main view");
     this->resize(1000, 600);
 
-    QKeyEvent * event;
+
+   /*QKeyEvent * event;
     mainScene->keyPressEvent(event);
-    mainScene->keyReleaseEvent(event);
+    mainScene->keyReleaseEvent(event);*/
+   // cout<<"bouh"<<endl;
 }

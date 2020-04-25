@@ -6,6 +6,8 @@
 #include <QTimer>
 #include <QTime>
 #include <QPainter>
+#include <QLCDNumber>
+
 #include <QRect>
 #include <QLabel>
 
@@ -23,6 +25,7 @@ private :
     QPixmap background ;
     AvatarItem* item;
     QTimer * timer;
+    QTime * temps;
     QGraphicsView * view;
     QList<RectItem*> rectangles;
     RectItem* trou;
@@ -30,11 +33,13 @@ private :
     RectItem* finTrou;
     RectItem* hauteurMax;
     RectItem* LimiteMax;
+    QLCDNumber * chronometre;
     int etatAvatar;
     int etatPrecedent;
     int etatPrecedent2;
     bool isSaut;
     int itemID;
+    int chrono;
 
 public:
     MainScene();
@@ -44,6 +49,9 @@ public:
     void keyPressEvent(QKeyEvent * event);
 
     void keyReleaseEvent(QKeyEvent * event);
+
+    void AfficherChrono();
+    void AfficherChrono2();
 
     //GETTERS
     AvatarItem* getItem(){
@@ -59,7 +67,7 @@ public:
         return etatPrecedent2;
     }
     int getItemID(){
-        return itemID;
+        return 0;
     }
     //SETTERS
 

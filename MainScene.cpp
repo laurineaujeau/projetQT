@@ -29,6 +29,7 @@ MainScene::MainScene(){
     this->addItem(item);
 
 
+
     this->rectangles.push_back(new RectItem(0,434,233,74)); // premier sol
     this->rectangles.push_back(new RectItem(350,434,467,74));// deuxieme sol
     this->rectangles.push_back(new RectItem(515,355,112,78));//buisson
@@ -52,6 +53,13 @@ MainScene::MainScene(){
     LimiteMax = new RectItem(808,0,1,506);
     this->addItem(LimiteMax);
     LimiteMax->setOpacity(0);
+
+    //this->chronometre = new QLCDNumber();
+    //this->addItem(chronometre);
+    //this->chronometre->setPos(1,1);
+
+    this->temps = new QTime();
+    this->temps->start();
 }
 
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
@@ -60,7 +68,7 @@ void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
 }
 
 void MainScene::update() {
-
+    //AfficherChrono2();
     // view update
 
     QGraphicsView * view = this->views().at(getItemID());
@@ -92,10 +100,13 @@ void MainScene::update() {
     }
     if (this->item->collidesWithItem(arrivee)){
         setEtatAvatar(0);
-        //cout<< "gagné"<< endl;
+        this->chrono = temps->elapsed();
+        AfficherChrono();
+        disconnect(timer, 0, 0, 0);
     }
     if (this->item->collidesWithItem(LimiteMax)){
         setEtatAvatar(0);
+
     }
     if (this->item->collidesWithItem(hauteurMax)){
         if (getEtatPrecedent()==4){
@@ -223,3 +234,41 @@ void MainScene::keyReleaseEvent(QKeyEvent * event){
     }
 }
 
+void MainScene::AfficherChrono(){
+
+   int heure = chrono/(60*60*1000);
+   int minute = chrono/(60*1000) - heure*60;
+   int seconde = chrono/(1000) - minute*60;
+   int milliseconde = chrono - seconde*1000;
+   if(heure>0){
+       cout<<"Votre temps : "<<heure<<"h "<<minute<<"m "<<seconde<<","<<milliseconde<<"s"<<endl;
+   }
+   else if (minute>0){
+       cout<<"Votre temps : "<<minute<<"m "<<seconde<<","<<milliseconde<<"s"<<endl;
+   }
+   else if (milliseconde<100){
+       cout<<"Votre temps : "<<seconde<<",0"<<milliseconde<<"s"<<endl;
+   }
+   else{
+       cout<<"Votre temps : "<<seconde<<","<<milliseconde<<"s"<<endl;
+   }
+}
+void MainScene::AfficherChrono2(){
+
+    int heure = chrono/(60*60*1000);
+    int minute = chrono/(60*1000) - heure*60;
+    int seconde = chrono/(1000) - minute*60;
+    int milliseconde = chrono - seconde*1000;
+    if(heure>0){
+        //chronometre->addText()
+    }
+    else if (minute>0){
+        cout<<"Votre temps : "<<minute<<"m "<<seconde<<","<<milliseconde<<"s"<<endl;
+    }
+    else if (milliseconde<100){
+        cout<<"Votre temps : "<<seconde<<",0"<<milliseconde<<"s"<<endl;
+    }
+    else{
+        cout<<"Votre temps : "<<seconde<<","<<milliseconde<<"s"<<endl;
+    }
+}

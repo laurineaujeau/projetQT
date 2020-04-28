@@ -11,23 +11,53 @@
 #include <QVector>
 #include <QLabel>
 #include <QRect>
+#include <QMessageBox>
 #include <iostream>
 #include <QKeyEvent>
 #include "MainScene.h"
 using namespace std;
 MainScene::MainScene(){
+    this->input = new QInputDialog();
+    bool ok= false;
+    pseudo = this->input->getText(parent,"Bienvenue !", "Pseudo:",QLineEdit::Normal,QString(),&ok); //https://openclassrooms.com/fr/courses/1894236-programmez-avec-le-langage-c/1899971-apprenez-a-utiliser-les-boites-de-dialogue-usuelles
 
-    this->background.load("foret.jpg");
-    this->setSceneRect(0, 0, this->background.width(), this->background.height());
+    while(ok && pseudo.isEmpty()){
+        this->message->critical(parent,"Bienvenue !", "Veulliez remplir le champ");
+        pseudo = this->input->getText(parent,"Bienvenue !", "Pseudo:",QLineEdit::Normal,QString(),&ok);
+    }
 
-    this->timer = new QTimer(this);
-    this->timer->start(30);
-    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    if (ok && !pseudo.isEmpty())
+    {
+        this->message->information(parent, "Bienvenue !", "Bonjour " + pseudo + ", le but du jeu est d'atteindre l'autre bout de la scene, utilisez les flêches pour vous déplacer et la barre espace pour sauter. Bonne Chance !");
+        this->background.load("foret.jpg");
+        this->setSceneRect(0, 0, this->background.width(), this->background.height());
+
+        this->item = new AvatarItem("Personnage", "personnage.png");
+        this->item->setPos(this->width()-810, this->height()/2.1 );
+        this->addItem(item);
+        partie();
+    }else{
+        return;
+    }
+
+}
+void MainScene::partie(){
+    if(boite->isEnabled()){
+        delete boite;
+    }
+    delete item;
+    //this->item->setPos(this->width()-810, this->height()/2.1 );
+    //this->addItem(item);
+    /*this->background.load("foret.jpg");
+    this->setSceneRect(0, 0, this->background.width(), this->background.height());*/
 
     this->item = new AvatarItem("Personnage", "personnage.png");
     this->item->setPos(this->width()-810, this->height()/2.1 );
     this->addItem(item);
 
+    this->timer = new QTimer(this);
+    this->timer->start(30);
+    connect(timer, SIGNAL(timeout()), this, SLOT(update()));
 
 
     this->rectangles.push_back(new RectItem(0,434,233,74)); // premier sol
@@ -55,13 +85,12 @@ MainScene::MainScene(){
     LimiteMax->setOpacity(0);
 
     //this->chronometre = new QLCDNumber();
-    //this->addItem(chronometre);
+    //this->addItem(chronometre);lo
     //this->chronometre->setPos(1,1);
 
     this->temps = new QTime();
     this->temps->start();
 }
-
 void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
     Q_UNUSED(rect);
     painter->drawPixmap(QRectF(0,0,background.width(), background.height()), background, sceneRect());
@@ -96,17 +125,39 @@ void MainScene::update() {
     }
     if (this->item->collidesWithItem(finTrou)){
         setEtatAvatar(0);
-        //cout<< "perdu"<< endl;
+        disconnect(timer, 0, 0, 0);
+        boite = new QWidget();
+        QLabel* text =new QLabel();
+        text->setText("Perdu !");
+        text->setMargin(15);
+        text->setAlignment(Qt::AlignCenter);
+        bouton1 = new QPushButton("Rejouer");
+        bouton2 = new QPushButton("Quitter");
+
+        QVBoxLayout *layout = new QVBoxLayout;
+        layout->addWidget(text);
+        layout->addWidget(bouton1);
+        layout->addWidget(bouton2);
+
+        boite->setLayout(layout);
+        boite->show();
+        //if(bouton1->clicked())
+
+       // quit();
+        connect (bouton1, SIGNAL ( clicked ()), this , SLOT (partie()));
+        connect (bouton2, SIGNAL ( clicked ()), this , SLOT (quit()));
+
     }
     if (this->item->collidesWithItem(arrivee)){
         setEtatAvatar(0);
+        //this->item->move("tomber"); // c'est le disconnect qui fait arreter le perso
         this->chrono = temps->elapsed();
         AfficherChrono();
         disconnect(timer, 0, 0, 0);
     }
     if (this->item->collidesWithItem(LimiteMax)){
         setEtatAvatar(0);
-
+        this->item->move("tomber");
     }
     if (this->item->collidesWithItem(hauteurMax)){
         if (getEtatPrecedent()==4){
@@ -271,4 +322,9 @@ void MainScene::AfficherChrono2(){
     else{
         cout<<"Votre temps : "<<seconde<<","<<milliseconde<<"s"<<endl;
     }
+}
+int MainScene::quit(){
+    delete item;
+    delete timer;
+    //return -1; seg fault apres avoir fermé la page
 }

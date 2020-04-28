@@ -7,10 +7,14 @@
 #include <QTime>
 #include <QPainter>
 #include <QLCDNumber>
-
+#include <QVBoxLayout>
+#include <QInputDialog>
+#include <QPushButton>
+#include <QMainWindow>
 #include <QRect>
 #include <QLabel>
-
+#include <QString>
+#include <QMessageBox>
 #ifndef PROJETQT_WINDOW_H
 #define PROJETQT_WINDOW_H
 #include "AvatarItem.h"
@@ -32,8 +36,15 @@ private :
     RectItem* arrivee;
     RectItem* finTrou;
     RectItem* hauteurMax;
+    QWidget* parent=0;
+    QMessageBox* message;
     RectItem* LimiteMax;
     QLCDNumber * chronometre;
+    QString pseudo;
+    QInputDialog* input;
+    QWidget* boite;
+    QPushButton *bouton1;
+    QPushButton *bouton2;
     int etatAvatar;
     int etatPrecedent;
     int etatPrecedent2;
@@ -43,6 +54,8 @@ private :
 
 public:
     MainScene();
+
+
 
     void drawBackground(QPainter *painter, const QRectF &rect);
 
@@ -84,6 +97,9 @@ public:
     //virtual ~MainScene();
 public slots :
     void update();
+    void partie();
+    //virtual ~MainScene();
+    int quit();
 
 };
 

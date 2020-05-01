@@ -6,15 +6,21 @@
 #include <QTimer>
 #include <QTime>
 #include <QPainter>
-#include <QLCDNumber>
+//#include <QLCDNumber>
 #include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QInputDialog>
 #include <QPushButton>
 #include <QMainWindow>
 #include <QRect>
 #include <QLabel>
 #include <QString>
+#include <QObject>
+#include <QWidget>
 #include <QMessageBox>
+#include <QTextStream>
+#include <QFile>
+#include <QTextEdit>
 #ifndef PROJETQT_WINDOW_H
 #define PROJETQT_WINDOW_H
 #include "AvatarItem.h"
@@ -39,7 +45,6 @@ private :
     QWidget* parent=0;
     QMessageBox* message;
     RectItem* LimiteMax;
-    QLCDNumber * chronometre;
     QString pseudo;
     QInputDialog* input;
     QWidget* boite;
@@ -49,22 +54,25 @@ private :
     int etatPrecedent;
     int etatPrecedent2;
     bool isSaut;
+    bool isActive;
     int itemID;
     int chrono;
 
 public:
+    //Mise en place de la scene
     MainScene();
 
-
-
+    //dessine la scene
     void drawBackground(QPainter *painter, const QRectF &rect);
 
+    //évenement produit à la pression d'une touche clavier
     void keyPressEvent(QKeyEvent * event);
 
+    //évenement produit à la levée d'une touche clavier
     void keyReleaseEvent(QKeyEvent * event);
 
-    void AfficherChrono();
-    void AfficherChrono2();
+    //Calcul le score du joueur et l'affiche
+    void tempsFinal();
 
     //GETTERS
     AvatarItem* getItem(){
@@ -94,11 +102,15 @@ public:
         this->etatPrecedent2=etatPrecedent2;
     }
 
-    //virtual ~MainScene();
+    //virtual ~mainWindow();
 public slots :
+    //actualisation régulière de la scene
     void update();
+
+    //lancement du jeu
     void partie();
-    //virtual ~MainScene();
+
+    //quitter le jeu
     int quit();
 
 };

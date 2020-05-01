@@ -20,15 +20,13 @@ private :
     int speed;
     QKeyEvent * event;
 
-
 public:
 
     AvatarItem(QString description, QString imageFileName) : QGraphicsPixmapItem(QPixmap(imageFileName)), description(description) {
         this->speed = 10;
     }
-
+    //calcul la position de l'avatar
     void move(string direction);
-
 
     //GETTERS
     int getSpeed(){
@@ -47,8 +45,5 @@ public:
     }
 
 };
-
-
-
 
 #endif //PROJETQT_PLANEITEM_H

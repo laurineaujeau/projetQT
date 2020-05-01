@@ -2,7 +2,6 @@
 // Created by lauri on 17/04/2020.
 //
 #include "MainScene.h"
-//#include "Menu.h"
 
 #include <QMainWindow>
 #include <QGraphicsView>
@@ -18,14 +17,13 @@ class mainWindow : public QMainWindow{
 
 private :
     MainScene* mainScene;
-   // Menu* menu;
     QGraphicsView* mainView;
     QGraphicsView* menuView;
 
 
 public:
     mainWindow(QWidget* parent = 0);
-    //virtual ~mainWindow() {};
+    virtual ~mainWindow() {};
 };
 
 

@@ -15,6 +15,7 @@
 #include <iostream>
 #include <QKeyEvent>
 #include <QObject>
+#include <QApplication>
 #include <QString>
 #include "MainScene.h"
 using namespace std;
@@ -22,7 +23,7 @@ MainScene::MainScene(){
     // menu
     this->input = new QInputDialog();
     bool ok= false;
-
+    bool cancel= false;
     //creation d'un widget input avec comme titre de widget "Bienvenue"
     // la phrase au dessus de l'input est "Pseudo"
     //
@@ -50,7 +51,9 @@ MainScene::MainScene(){
         partie();
     }
     else{
-        return;
+        //delete input;
+        QApplication::quit();
+        //connect (0, 0, qApp , SLOT (quit()));
     }
 
 }
@@ -113,7 +116,7 @@ void MainScene::drawBackground(QPainter *painter, const QRectF &rect) {
 
 void MainScene::update() {
     // Mise a jour de la vue centrée sur l'avatar
-    QGraphicsView * view = this->views().at(getItemID());
+    this-> view = this->views().at(getItemID());
     view->centerOn(this->item);
 
     //Collisions
@@ -163,7 +166,7 @@ void MainScene::update() {
         isActive=true;
         //connexion entre le bouton et la fonction qui permet d'executer le choix
         connect (bouton1, SIGNAL ( clicked ()), this , SLOT (partie()));
-        connect (bouton2, SIGNAL ( clicked ()), this , SLOT (quit()));
+        connect (bouton2, SIGNAL ( clicked ()), qApp , SLOT (quit()));
 
     }
     if (this->item->collidesWithItem(arrivee)){
@@ -412,7 +415,7 @@ void MainScene::tempsFinal(){
     isActive=true;
     //connexion entre le bouton et la fonction qui permet d'executer le choix
     connect (bouton1, SIGNAL ( clicked ()), this , SLOT (partie()));
-    connect (bouton2, SIGNAL ( clicked ()), this , SLOT (quit()));
+    connect (bouton2, SIGNAL ( clicked ()), qApp , SLOT (quit()));
 }
 
 void MainScene::keyPressEvent(QKeyEvent * event){
@@ -454,10 +457,16 @@ void MainScene::keyReleaseEvent(QKeyEvent * event){
     }
 }
 
-int MainScene::quit(){
+void MainScene::quit(){
     delete item;
     delete timer;
-    //~mainWindow{};
+    delete boite;
+    delete view;
+    //MainScene::~MainScene();
+    //QGraphicsScene::~QGraphicsScene();
+   // QGraphicsView::~QGraphicsView();
+    //QApplication::~QApplication());
     //delete background;
     //return -1; seg fault apres avoir fermé la page
 }
+//virtual MainScene::~MainScene(){}

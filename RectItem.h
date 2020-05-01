@@ -11,6 +11,7 @@
 
 class RectItem : public QGraphicsRectItem {
 public:
+    //Défini la position et les dimensions des rectangles servant pour les collisions
     RectItem(int x, int y, int width, int height);
 };
 

@@ -55,7 +55,7 @@ private :
     int etatPrecedent2;
     bool isSaut;
     bool isActive;
-    int itemID;
+    //int itemID;
     int chrono;
 
 public:
@@ -102,7 +102,7 @@ public:
         this->etatPrecedent2=etatPrecedent2;
     }
 
-    //virtual ~mainWindow();
+    //virtual ~MainScene();
 public slots :
     //actualisation régulière de la scene
     void update();
@@ -111,7 +111,7 @@ public slots :
     void partie();
 
     //quitter le jeu
-    int quit();
+    void quit();
 
 };
 

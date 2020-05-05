@@ -373,6 +373,7 @@ void MainScene::tempsFinal(){
             else{
                 vchaine = vscore +svseconde+","+svmilisec+"s";
             }
+            vchaine += " obtenu par "+ this->pseudo;
             texte3->setText(vchaine);
             texte3->setMargin(10);
             texte3->setAlignment(Qt::AlignCenter);

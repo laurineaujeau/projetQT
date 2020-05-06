@@ -2,7 +2,7 @@
 ## Description
 Ce projet a été codé en C++ et QT. Les objectifs étaient :
 * Créer un jeu d'objet qui saute des obstacles sous forme de bars ou de vides en utilisant les touches du clavier.
-* Le jeu doit être composé d'au moins deux fenêtres, la première est une vue complète sur le plateau de jeu et la seconde est une petite vue centrée sur l'obejt en mouvement.
+* Le jeu doit être composé d'au moins deux fenêtres, la première est une vue complète sur le plateau de jeu et la seconde est une petite vue centrée sur l'objet en mouvement.
 * L'objet qui se déplace doit atteindre une ligne d'arrivée et le meilleur temps pour y parvenir doit être mémorisé.
 * Le joueur doit pouvoir recommencer une partie ou quitter complètement le jeu lorsqu'il a franchi la ligne d'arrivée.
 

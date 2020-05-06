@@ -327,12 +327,13 @@ void MainScene::tempsFinal(){
     if(fichier.open(QIODevice::ReadOnly)){ //j'ouvre le fichier en lecture seule pour comparer les scores
         int ligne=0;
         int vintchrono=0;
+        QString vainqueur = "";
         QTextStream flux(&fichier);
         // le flux permet de lire le fichier en entier ligne pas ligne
         while(!flux.atEnd()){
             if (ligne==0){
                 // la première ligne correspond au pseudo du joueur qui a le record
-                QString vainqueur=fichier.readLine();
+                vainqueur=fichier.readLine();
             }
             if (ligne==1){
                 //le record
@@ -373,7 +374,7 @@ void MainScene::tempsFinal(){
             else{
                 vchaine = vscore +svseconde+","+svmilisec+"s";
             }
-            vchaine += " obtenu par "+ this->pseudo;
+            vchaine += " obtenu par "+ vainqueur;
             texte3->setText(vchaine);
             texte3->setMargin(10);
             texte3->setAlignment(Qt::AlignCenter);
